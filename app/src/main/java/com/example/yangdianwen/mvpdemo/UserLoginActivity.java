@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 /**
  * Created by yangdianwen on 16-6-26.
+ * 主界面的逻辑处理
  */
 public class UserLoginActivity extends AppCompatActivity implements IUserLoginView
 {
@@ -32,7 +33,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
         mBtnClear = (Button) findViewById(R.id.btn_clear);
         mBtnLogin = (Button) findViewById(R.id.btn_login);
 
-
+        //登陆监听
         mBtnLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -41,7 +42,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
                 mUserLoginPresenter.login();
             }
         });
-
+        //清除数据监听
         mBtnClear.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -51,6 +52,7 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
             }
         });
     }
+    //获取用户信息
     @Override
     public String getUserName()
     {
@@ -62,6 +64,8 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     {
         return mEtPassword.getText().toString();
     }
+
+    //清空数据具体操作
     @Override
     public void clearUserName()
     {
@@ -72,29 +76,29 @@ public class UserLoginActivity extends AppCompatActivity implements IUserLoginVi
     {
         mEtPassword.setText("");
     }
+    //显示progressbar
     @Override
     public void showLoading()
     {
 
     }
-
+    //隐藏progressbar
     @Override
     public void hideLoading()
     {
 
     }
-
+      //登陆成功后要执行的逻辑操作
     @Override
     public void toMainActivity(User user)
     {
-        Toast.makeText(this, user.getUsername() +
-                " login success , to MainActivity", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, user.getUsername() + " login success , to MainActivity", Toast.LENGTH_SHORT).show();
     }
 
+    //登陆失败的逻辑操作
     @Override
     public void showFailedError()
     {
-        Toast.makeText(this,
-                "login failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "login failed", Toast.LENGTH_SHORT).show();
     }
 }

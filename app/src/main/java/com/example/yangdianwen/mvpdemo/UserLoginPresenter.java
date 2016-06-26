@@ -15,18 +15,21 @@ public class UserLoginPresenter
     private IUserBiz userBiz;
     private IUserLoginView userLoginView;
     private Handler mHandler = new Handler();
-
+  //Presenter的 constructer，对数据进行初始化
     public UserLoginPresenter(IUserLoginView userLoginView)
-    {
+    {   //这里userLoginView是携带数据的
         this.userLoginView = userLoginView;
+        //这里初始化userBiz使用的多态
         this.userBiz = new UserBiz();
     }
 
     public void login()
     {
         userLoginView.showLoading();
+        //UserBiz类里的login方法
         userBiz.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener()
         {
+            //登陆成功要执行的逻辑操作
             @Override
             public void loginSuccess(final User user)
             {
@@ -35,13 +38,14 @@ public class UserLoginPresenter
                 {
                     @Override
                     public void run()
-                    {
+                    {   //执行跳转的意图
                         userLoginView.toMainActivity(user);
                         userLoginView.hideLoading();
                     }
                 });
 
             }
+            //登陆失败要执行的逻辑操作
             @Override
             public void loginFailed()
             {
@@ -50,7 +54,7 @@ public class UserLoginPresenter
                 {
                     @Override
                     public void run()
-                    {
+                    {    //显示错误信息
                         userLoginView.showFailedError();
                         userLoginView.hideLoading();
                     }

@@ -2,6 +2,7 @@ package com.example.yangdianwen.mvpdemo;
 
 /**
  * Created by yangdianwen on 16-6-26.
+ * 模拟耗时操作的类，判断用户名，密码是否正确
  */
 public class UserBiz implements IUserBiz
 {
